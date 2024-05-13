@@ -181,29 +181,19 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
+-- Colemak mappings
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set('n', 'n', 'j', opts)
-vim.keymap.set('x', 'n', 'j', opts)
-vim.keymap.set('o', 'n', 'j', opts)
-vim.keymap.set('n', 'e', 'k', opts)
-vim.keymap.set('x', 'e', 'k', opts)
-vim.keymap.set('o', 'e', 'k', opts)
-vim.keymap.set('n', 'i', 'l', opts)
-vim.keymap.set('x', 'i', 'l', opts)
-vim.keymap.set('o', 'i', 'l', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'n', 'j', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'e', 'k', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'i', 'l', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'N', 'J', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'E', 'K', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'I', 'L', opts)
 
--- Colemak Insert
-vim.keymap.set('n', 'u', 'i', opts)
-vim.keymap.set('n', 'U', 'I', opts)
-vim.keymap.set('x', 'u', 'i', opts)
-vim.keymap.set('x', 'U', 'I', opts)
-vim.keymap.set('o', 'u', 'i', opts)
-vim.keymap.set('o', 'U', 'I', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'u', 'i', opts)
+vim.keymap.set({ 'n', 'x', 'o' }, 'U', 'I', opts)
 
 -- Undo/redo
 vim.keymap.set('n', 'l', 'u', opts)
@@ -366,6 +356,35 @@ require('lazy').setup({
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+
+      -- Nice git frontend
+      {
+        'NeogitOrg/neogit',
+        config = true,
+        keys = {
+          {
+            '<leader>gg',
+            function()
+              require('neogit').open {}
+            end,
+            desc = 'Git status',
+          },
+          {
+            '<leader>gs',
+            function()
+              require('neogit').open {}
+            end,
+            desc = 'Git status',
+          },
+          {
+            '<leader>gc',
+            function()
+              require('neogit').open {}
+            end,
+            desc = 'Git commit',
+          },
+        },
+      },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -915,11 +934,11 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
