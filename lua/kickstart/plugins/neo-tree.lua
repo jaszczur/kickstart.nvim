@@ -22,6 +22,7 @@ return {
           ['q'] = 'close_window',
           ['n'] = 'move_cursor_down',
           ['e'] = 'move_cursor_up',
+          ['<TAB>'] = 'open_tabnew',
           ['<leader>op'] = 'close_window',
         },
       },
