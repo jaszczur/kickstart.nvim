@@ -222,7 +222,7 @@ vim.keymap.set('n', '<C-i>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- [[ Doomizations ]]
 --
 -- Buffers
-vim.keymap.set('n', '<leader>bd', ':q <CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>bd', ':e#<bar>bd # <CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>bn', ':enew <CR>', { desc = 'New buffer' })
 vim.keymap.set('n', '<leader>bp', ':b# <CR>', { desc = '[B]uffer [P]revious' })
 vim.keymap.set('n', '<leader><TAB>', ':b# <CR>', { desc = '[B]uffer [P]revious' })
