@@ -181,6 +181,18 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- Neovide
+vim.g.neovide_scale_factor = 1.0
+local change_scale_factor = function(delta)
+  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+end
+vim.keymap.set('n', '<C-=>', function()
+  change_scale_factor(1.25)
+end)
+vim.keymap.set('n', '<C-->', function()
+  change_scale_factor(1 / 1.25)
+end)
+
 -- Colemak mappings
 
 local opts = { noremap = true, silent = true }
@@ -211,6 +223,7 @@ vim.keymap.set('n', '<C-i>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --
 -- Buffers
 vim.keymap.set('n', '<leader>bd', ':q <CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>bn', ':enew <CR>', { desc = 'New buffer' })
 vim.keymap.set('n', '<leader>bp', ':b# <CR>', { desc = '[B]uffer [P]revious' })
 vim.keymap.set('n', '<leader><TAB>', ':b# <CR>', { desc = '[B]uffer [P]revious' })
 
@@ -663,6 +676,8 @@ require('lazy').setup({
         eslint = {},
         tailwindcss = {},
         ocamllsp = {},
+        cssls = {},
+        jsonls = {},
 
         lua_ls = {
           -- cmd = {...},
@@ -871,7 +886,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-day'
+      vim.cmd.colorscheme 'tokyonight-moon'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -922,7 +937,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'typescript', 'ocaml' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'json', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'ocaml', 'toml', 'typescript' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
