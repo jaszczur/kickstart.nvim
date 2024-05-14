@@ -4,4 +4,7 @@
 -- See the kickstart.nvim README for more information
 return {
   -- { 'reasonml-editor/vim-reason-plus', lazy = false },
+  {
+    'mustache/vim-mustache-handlebars',
+  },
 }
