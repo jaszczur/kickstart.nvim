@@ -20,10 +20,11 @@ return {
         mappings = {
           ['\\'] = 'close_window',
           ['q'] = 'close_window',
-          ['n'] = 'move_cursor_down',
-          ['e'] = 'move_cursor_up',
-          ['<TAB>'] = 'open_tabnew',
           ['<leader>op'] = 'close_window',
+          ['<TAB>'] = 'open',
+          -- use Colemak up/down for n & e
+          ['n'] = 'noop',
+          ['e'] = 'noop',
         },
       },
     },

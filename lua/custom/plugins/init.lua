@@ -7,6 +7,8 @@ return {
   {
     'mustache/vim-mustache-handlebars',
     'github/copilot.vim',
+    'famiu/bufdelete.nvim',
     require 'custom.plugins.orgmode',
+    -- require 'custom.plugins.tmux',
   },
 }

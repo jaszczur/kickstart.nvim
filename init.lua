@@ -421,6 +421,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[R]ecent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>pf', builtin.git_files, { desc = '[P]roject [F]iles ("." for repeat)' })
 
+      -- Slightly advanced example of overriding default behavior and theme
       local find_in_curr_buff = function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -429,7 +430,6 @@ require('lazy').setup({
         })
       end
 
-      -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', find_in_curr_buff, { desc = '[/] Fuzzily search in current buffer' })
       vim.keymap.set('n', '<leader>ss', find_in_curr_buff, { desc = '[/] Fuzzily search in current buffer' })
 
@@ -446,6 +446,32 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Search project files
+      local live_grep_from_project_git_root = function()
+        local function is_git_repo()
+          vim.fn.system 'git rev-parse --is-inside-work-tree'
+
+          return vim.v.shell_error == 0
+        end
+
+        local get_git_root = function()
+          local dot_git_path = vim.fn.finddir('.git', '.;')
+          return vim.fn.fnamemodify(dot_git_path, ':h')
+        end
+
+        local opts = {}
+
+        if is_git_repo() then
+          opts = {
+            cwd = get_git_root(),
+          }
+        end
+
+        require('telescope.builtin').live_grep(opts)
+      end
+
+      vim.keymap.set('n', '<leader>sp', live_grep_from_project_git_root, { desc = '[S]earch [p]roject files' })
     end,
   },
 
@@ -819,24 +845,6 @@ require('lazy').setup({
           { name = 'orgmode' },
         },
       }
-    end,
-  },
-
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-moon'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
     end,
   },
 
