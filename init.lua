@@ -620,7 +620,20 @@ require('lazy').setup({
               local new_value = not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }
               vim.lsp.inlay_hint.enable(new_value, { bufnr = event.buf })
               print('Inlay hints are now ' .. (new_value and 'enabled' or 'disabled'))
-            end, '[T]oggle Inlay [H]ints')
+            end, '[T]oggle inlay [H]ints')
+          end
+
+          if client and client.server_capabilities.codeLensProvider then
+            local toggle = function()
+              if next(vim.lsp.codelens.get(event.buf)) == nil then
+                vim.lsp.codelens.refresh { bufnr = event.buf }
+              else
+                vim.lsp.codelens.clear(nil, event.buf)
+              end
+            end
+
+            map('<leader>tl', toggle, '[T]oggle code [L]ens')
+            map('<leader>cl', vim.lsp.codelens.run, 'Run code [L]ens')
           end
         end,
       })
@@ -655,7 +668,12 @@ require('lazy').setup({
         tsserver = {},
         eslint = {},
         tailwindcss = {},
-        ocamllsp = {},
+        ocamllsp = {
+          settings = {
+            codelens = { enable = true },
+            inlayHints = { enable = true },
+          },
+        },
         cssls = {},
         jsonls = {},
 
