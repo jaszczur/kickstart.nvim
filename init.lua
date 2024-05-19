@@ -665,18 +665,9 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
-        eslint = {},
-        tailwindcss = {},
-        ocamllsp = {
-          settings = {
-            codelens = { enable = true },
-            inlayHints = { enable = true },
-          },
-        },
         cssls = {},
+        eslint = {},
         jsonls = {},
-
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -691,6 +682,8 @@ require('lazy').setup({
             },
           },
         },
+        tailwindcss = {},
+        tsserver = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -721,6 +714,21 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- Non Mason configuration
+      local non_mason_servers = {
+        gleam = {},
+
+        ocamllsp = {
+          settings = {
+            codelens = { enable = true },
+            inlayHints = { enable = true },
+          },
+        },
+      }
+      for srv_name, srv_conf in pairs(non_mason_servers) do
+        require('lspconfig')[srv_name].setup(srv_conf)
+      end
     end,
   },
 
@@ -929,7 +937,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'json', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'ocaml', 'toml', 'typescript' },
+      ensure_installed = { 'bash', 'c', 'diff', 'gleam', 'html', 'json', 'lua', 'luadoc', 'markdown', 'ocaml', 'toml', 'typescript', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
