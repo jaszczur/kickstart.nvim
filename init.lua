@@ -189,6 +189,9 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- [[ Custom Keymaps ]] Load custom (not kickstart) keymaps
 require 'custom.keymaps'
+if vim.g.neovide then
+  require 'custom.neovide'
+end
 
 -- [[ File types ]]
 vim.filetype.add {
