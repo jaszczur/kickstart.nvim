@@ -17,11 +17,9 @@ return {
     },
   },
   init = function()
-    local hour = tonumber(os.date('%H', os.time()))
-    if hour >= 8 and hour < 16 then
-      vim.cmd.colorscheme 'catppuccin-latte'
-    else
-      vim.cmd.colorscheme 'catppuccin-frappe'
-    end
+    -- local hour = tonumber(os.date('%H', os.time()))
+    -- if hour >= 8 and hour < 16 then
+    --   vim.cmd.colorscheme 'catppuccin-latte'
+    vim.cmd.colorscheme 'catppuccin-frappe'
   end,
 }
