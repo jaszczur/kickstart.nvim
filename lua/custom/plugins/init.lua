@@ -6,7 +6,6 @@ return {
   -- { 'reasonml-editor/vim-reason-plus', lazy = false },
   {
     'mustache/vim-mustache-handlebars',
-    'github/copilot.vim',
     'famiu/bufdelete.nvim',
     'aklt/plantuml-syntax',
     {
