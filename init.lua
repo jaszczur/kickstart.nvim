@@ -1037,7 +1037,7 @@ require('lazy').setup({
     enabled = false,
   },
   checker = {
-    enabled = true,
+    -- enabled = true,
     -- frequency = 10800, -- default: 3600 (1 hour)
   },
 
