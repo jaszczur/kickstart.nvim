@@ -845,8 +845,23 @@ require('lazy').setup({
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
+
+      local cmp_config_default = require 'cmp.config.default'()
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+
+      local copilot_reverse_prioritize = function(entry1, entry2)
+        -- if entry1.source.name == 'copilot' and entry2.source.name ~= 'copilot' then
+        --   return false
+        -- elseif entry2.copilot == 'copilot' and entry1.source.name ~= 'copilot' then
+        --   return true
+        -- end
+        if entry1.copilot and not entry2.copilot then
+          return false
+        elseif entry2.copilot and not entry1.copilot then
+          return true
+        end
+      end
 
       cmp.setup {
         snippet = {
@@ -909,11 +924,17 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'orgmode' },
-          { name = 'copilot' },
+          { name = 'nvim_lsp', group_index = 1 },
+          { name = 'luasnip', group_index = 1 },
+          { name = 'path', group_index = 2 },
+          { name = 'orgmode', group_index = 2 },
+          { name = 'buffer', group_index = 3 },
+          { name = 'copilot', group_index = 3 },
+        },
+        sorting = {
+          priority_weight = 2,
+          -- doesn't do mutch :( https://github.com/zbirenbaum/copilot-cmp/issues/88
+          comparators = table.insert(cmp_config_default.sorting.comparators, copilot_reverse_prioritize),
         },
       }
 
