@@ -710,7 +710,24 @@ require('lazy').setup({
             },
           },
         },
-        tailwindcss = {},
+        tailwindcss = {
+          -- filetypes = {
+          --   -- clasic web ftypes
+          --   'html',
+          --   'javascript',
+          --   'javascriptreact',
+          --   'typescript',
+          --   'typescriptreact',
+          --   'css',
+          --   'less',
+          --   'sass',
+          --   'scss',
+          --
+          --   -- additional
+          --   'rust',
+          --   'jinja.html',
+          -- },
+        },
         tsserver = {},
       }
 
