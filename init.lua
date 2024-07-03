@@ -122,6 +122,9 @@ vim.opt_local.tabstop = 2
 vim.opt_local.shiftwidth = 2
 vim.opt_local.expandtab = true
 
+-- Set conceal level as suggested by Obsidian plugin
+vim.opt.conceallevel = 1
+
 -- Save undo history
 vim.opt.undofile = true
 
@@ -447,12 +450,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find existing [B]uffers' })
       vim.keymap.set('n', '<leader>ht', builtin.colorscheme, { desc = 't[H]eme [T]oggle' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ile [F]ind' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[R]ecent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>pf', builtin.git_files, { desc = '[P]roject [F]iles ("." for repeat)' })
+      vim.keymap.set('n', '<leader><leader>', builtin.commands, { desc = 'Vim commands' })
 
       -- Slightly advanced example of overriding default behavior and theme
       local find_in_curr_buff = function()
