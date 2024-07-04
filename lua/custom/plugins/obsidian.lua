@@ -13,6 +13,7 @@ return {
   event = {
     'BufReadPre ' .. obsidian_files,
     'BufNewFile ' .. obsidian_files,
+    'VeryLazy', -- load it anyway
   },
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -32,6 +33,12 @@ return {
     templates = {
       folder = 'templates',
     },
+    notes_subdir = 'zettels',
+    new_notes_location = 'notes_subdir',
+    preferred_link_style = 'wiki',
+    attachments = {
+      img_folder = 'attachments',
+    },
 
     -- Optional, customize how note IDs are generated given an optional title.
     ---@param title string|?
@@ -43,29 +50,62 @@ return {
       local suffix = ''
       if title ~= nil then
         -- If title is given, transform it into valid file name.
-        suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+        -- suffix = title:gsub(' ', '-'):gsub('[^A-Za-z0-9-]', ''):lower()
+        suffix = title:gsub('[^A-Za-z0-9 -ŻÓŁĆĄŹŃżółćąźń]', '')
+        -- suffix = title:gsub('[%c%p]', '')
       else
         -- If title is nil, just add 4 random uppercase letters to the suffix.
+        suffix = 'raw '
         for _ = 1, 4 do
-          suffix = suffix .. string.char(math.random(65, 90))
+          suffix = '' .. string.char(math.random(65, 90))
         end
       end
-      return tostring(os.time()) .. '-' .. suffix
+      return os.date '%Y%m%d%H%M%S' .. ' ' .. suffix
     end,
   },
 
   keys = {
     {
+      '<leader>nn',
+      ':ObsidianNew<CR>',
+      desc = '[n]ew note',
+    },
+    {
+      '<leader>nt',
+      ':ObsidianToday<CR>',
+      desc = '[t]oday note',
+    },
+    {
+      '<leader>ny',
+      ':ObsidianYesterday<CR>',
+      desc = '[y]esterday note',
+    },
+    {
+      '<leader>nm',
+      ':ObsidianTomorrow<CR>',
+      desc = 'To[m]morow note',
+    },
+    {
+      '<leader>ns',
+      ':ObsidianSearch<CR>',
+      desc = '[s]earch notes',
+    },
+    {
       '<localleader>tc',
       function()
         require('obsidian').util.toggle_checkbox()
       end,
-      desc = '[T]oggle [c]heckbox',
+      desc = '[t]oggle [c]heckbox',
     },
     {
-      '<leader>fn',
-      ':ObsidianNew<CR>',
-      desc = 'Create Obsidian [n]ote',
+      '<localleader>T',
+      ':ObsidianTags<CR>',
+      desc = '[T]ags',
+    },
+    {
+      '<localleader>b',
+      ':ObsidianBacklinks<CR>',
+      desc = '[b]acklinks',
     },
   },
 }
