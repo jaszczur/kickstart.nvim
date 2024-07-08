@@ -105,7 +105,12 @@ return {
     {
       '<localleader>b',
       ':ObsidianBacklinks<CR>',
-      desc = '[b]acklinks',
+      desc = '[b]acklinks to current note',
+    },
+    {
+      '<localleader>l',
+      ':ObsidianLinks<CR>',
+      desc = '[l]inks in current note',
     },
   },
 }
