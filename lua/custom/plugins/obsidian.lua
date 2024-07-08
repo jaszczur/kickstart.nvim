@@ -62,6 +62,14 @@ return {
       end
       return os.date '%Y%m%d%H%M%S' .. ' ' .. suffix
     end,
+    follow_url_func = function(url)
+      -- Open the URL in the default web browser.
+      if vim.loop.os_uname().sysname == 'Darwin' then
+        vim.fn.jobstart { 'open', url } -- Mac OS
+      else
+        vim.fn.jobstart { 'xdg-open', url } -- Linux
+      end
+    end,
   },
 
   keys = {
