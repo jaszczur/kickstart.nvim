@@ -117,6 +117,9 @@ vim.opt.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Break lines on whole words
+vim.opt.linebreak = true
+
 -- Get rid of tabs
 vim.opt_local.tabstop = 2
 vim.opt_local.shiftwidth = 2
