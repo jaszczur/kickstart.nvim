@@ -686,6 +686,8 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      local tailwind_defaults = require('lspconfig.server_configurations.tailwindcss').default_config
+
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -717,22 +719,29 @@ require('lazy').setup({
           },
         },
         tailwindcss = {
-          -- filetypes = {
-          --   -- clasic web ftypes
-          --   'html',
-          --   'javascript',
-          --   'javascriptreact',
-          --   'typescript',
-          --   'typescriptreact',
-          --   'css',
-          --   'less',
-          --   'sass',
-          --   'scss',
-          --
-          --   -- additional
-          --   'rust',
-          --   'jinja.html',
-          -- },
+          filetypes = {
+            'rust',
+            unpack(tailwind_defaults.filetypes),
+          },
+          init_options = {
+            userLanguages = {
+              rust = 'html',
+              unpack(tailwind_defaults.init_options.userLanguages),
+            },
+          },
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  -- '\\w+((?:\\.\\s*\\S+\\s*)*)',
+                  -- '\\."?([^."]+)"?',
+
+                  'class=[\'\\"]([^\'\\"]*)',
+                },
+              },
+              unpack(tailwind_defaults.settings.tailwindCSS),
+            },
+          },
         },
         tsserver = {},
       }
