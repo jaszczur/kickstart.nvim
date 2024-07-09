@@ -33,7 +33,7 @@ return {
     templates = {
       folder = 'templates',
     },
-    notes_subdir = 'zettels',
+    notes_subdir = 'permanent',
     new_notes_location = 'notes_subdir',
     preferred_link_style = 'wiki',
     attachments = {
@@ -104,21 +104,31 @@ return {
         require('obsidian').util.toggle_checkbox()
       end,
       desc = '[t]oggle [c]heckbox',
+      ft = 'markdown',
     },
     {
       '<localleader>T',
       ':ObsidianTags<CR>',
       desc = '[T]ags',
+      ft = 'markdown',
     },
     {
       '<localleader>b',
       ':ObsidianBacklinks<CR>',
       desc = '[b]acklinks to current note',
+      ft = 'markdown',
     },
     {
       '<localleader>l',
       ':ObsidianLinks<CR>',
       desc = '[l]inks in current note',
+      ft = 'markdown',
+    },
+    {
+      '<localleader>o',
+      ':ObsidianOpen<CR>',
+      desc = '[o]pen in Obsidian app',
+      ft = 'markdown',
     },
   },
 }
