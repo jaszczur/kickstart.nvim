@@ -7,7 +7,8 @@ return {
       start_enabled = false,
     }
   end,
-  ft = 'markdown',
+  -- disable the plugin so it doesn't conflict with Obsidian
+  -- ft = 'markdown',
   keys = {
     {
       '<localleader>tr',
