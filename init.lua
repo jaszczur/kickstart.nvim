@@ -677,6 +677,14 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      -- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
+      -- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
+      capabilities.workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      }
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -686,6 +694,7 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
       local tailwind_defaults = require('lspconfig.server_configurations.tailwindcss').default_config
 
       local servers = {
@@ -744,6 +753,17 @@ require('lazy').setup({
           },
         },
         tsserver = {},
+        markdown_oxide = {
+          on_attach = function(client, bufnr)
+            if client.name == 'markdown_oxide' then
+              vim.api.nvim_create_user_command('Daily', function(args)
+                local input = args.args
+
+                vim.lsp.buf.execute_command { command = 'jump', arguments = { input } }
+              end, { desc = 'Open daily note', nargs = '*' })
+            end
+          end,
+        },
       }
 
       -- Ensure the servers and tools above are installed
@@ -854,12 +874,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -956,7 +976,15 @@ require('lazy').setup({
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = {
-          { name = 'nvim_lsp', group_index = 1 },
+          {
+            name = 'nvim_lsp',
+            group_index = 1,
+            option = {
+              markdown_oxide = {
+                keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+              },
+            },
+          },
           { name = 'luasnip', group_index = 1 },
           { name = 'path', group_index = 2 },
           { name = 'orgmode', group_index = 2 },
