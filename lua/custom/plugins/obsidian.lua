@@ -33,7 +33,7 @@ return {
     templates = {
       folder = 'templates',
     },
-    notes_subdir = 'permanent',
+    notes_subdir = 'inbox',
     new_notes_location = 'notes_subdir',
     preferred_link_style = 'wiki',
     attachments = {
