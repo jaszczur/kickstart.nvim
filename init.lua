@@ -295,25 +295,35 @@ require('lazy').setup({
       require('which-key').setup()
 
       -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
-        ['<leader>f'] = { name = '[F]ile', _ = 'which_key_ignore' },
-        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-        ['<leader>o'] = { name = '[O]pen tool', _ = 'which_key_ignore' },
-        ['<leader>p'] = { name = '[P]roject', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]indow', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore' },
-        ['gs'] = { name = '[S]urround', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>b', group = '[B]uffer' },
+        { '<leader>b_', hidden = true },
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>c_', hidden = true },
+        { '<leader>f', group = '[F]ile' },
+        { '<leader>f_', hidden = true },
+        { '<leader>g', group = '[G]it' },
+        { '<leader>g_', hidden = true },
+        { '<leader>gh', group = '[G]it [H]unk' },
+        { '<leader>gh_', hidden = true },
+        { '<leader>h', group = '[H]arpoon' },
+        { '<leader>h_', hidden = true },
+        { '<leader>o', group = '[O]pen tool' },
+        { '<leader>o_', hidden = true },
+        { '<leader>p', group = '[P]roject' },
+        { '<leader>p_', hidden = true },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>r_', hidden = true },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>s_', hidden = true },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t_', hidden = true },
+        { '<leader>w', group = '[W]indow' },
+        { '<leader>w_', hidden = true },
+        { 'gs', group = '[S]urround' },
+        { 'gs_', hidden = true },
+        { '<leader>gh', desc = '[G]it [H]unk', mode = 'v' },
       }
-      -- visual mode
-      require('which-key').register({
-        ['<leader>gh'] = { '[G]it [H]unk' },
-      }, { mode = 'v' })
     end,
   },
 
