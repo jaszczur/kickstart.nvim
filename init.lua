@@ -738,29 +738,29 @@ require('lazy').setup({
           },
         },
         tailwindcss = {
-          filetypes = {
-            'rust',
-            unpack(tailwind_defaults.filetypes),
-          },
-          init_options = {
-            userLanguages = {
-              rust = 'html',
-              unpack(tailwind_defaults.init_options.userLanguages),
-            },
-          },
-          settings = {
-            tailwindCSS = {
-              experimental = {
-                classRegex = {
-                  -- '\\w+((?:\\.\\s*\\S+\\s*)*)',
-                  -- '\\."?([^."]+)"?',
-
-                  'class=[\'\\"]([^\'\\"]*)',
-                },
-              },
-              unpack(tailwind_defaults.settings.tailwindCSS),
-            },
-          },
+          -- filetypes = {
+          --   'rust',
+          --   unpack(tailwind_defaults.filetypes),
+          -- },
+          -- init_options = {
+          --   userLanguages = {
+          --     rust = 'html',
+          --     unpack(tailwind_defaults.init_options.userLanguages),
+          --   },
+          -- },
+          -- settings = {
+          --   tailwindCSS = {
+          --     experimental = {
+          --       classRegex = {
+          --         -- '\\w+((?:\\.\\s*\\S+\\s*)*)',
+          --         -- '\\."?([^."]+)"?',
+          --
+          --         'class=[\'\\"]([^\'\\"]*)',
+          --       },
+          --     },
+          --     unpack(tailwind_defaults.settings.tailwindCSS),
+          --   },
+          -- },
         },
         tsserver = {},
         -- markdown_oxide = {
