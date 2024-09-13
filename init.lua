@@ -762,7 +762,7 @@ require('lazy').setup({
           --   },
           -- },
         },
-        tsserver = {},
+        ts_ls = {},
         -- markdown_oxide = {
         --   on_attach = function(client, bufnr)
         --     if client.name == 'markdown_oxide' then
