@@ -774,6 +774,7 @@ require('lazy').setup({
         --     end
         --   end,
         -- },
+        jdtls = {},
       }
 
       -- Ensure the servers and tools above are installed
