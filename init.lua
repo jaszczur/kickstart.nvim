@@ -121,9 +121,9 @@ vim.opt.breakindent = true
 vim.opt.linebreak = true
 
 -- Get rid of tabs
-vim.opt_local.tabstop = 2
-vim.opt_local.shiftwidth = 2
-vim.opt_local.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 
 -- Set conceal level as suggested by Obsidian plugin
 vim.opt.conceallevel = 1
@@ -705,7 +705,8 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
-      local tailwind_defaults = require('lspconfig.server_configurations.tailwindcss').default_config
+      -- local tailwind_defaults = require('lspconfig.server_configurations.tailwindcss').default_config
+      local nvim_lsp = require 'lspconfig'
 
       local servers = {
         -- clangd = {},
@@ -737,43 +738,14 @@ require('lazy').setup({
             },
           },
         },
-        tailwindcss = {
-          -- filetypes = {
-          --   'rust',
-          --   unpack(tailwind_defaults.filetypes),
-          -- },
-          -- init_options = {
-          --   userLanguages = {
-          --     rust = 'html',
-          --     unpack(tailwind_defaults.init_options.userLanguages),
-          --   },
-          -- },
-          -- settings = {
-          --   tailwindCSS = {
-          --     experimental = {
-          --       classRegex = {
-          --         -- '\\w+((?:\\.\\s*\\S+\\s*)*)',
-          --         -- '\\."?([^."]+)"?',
-          --
-          --         'class=[\'\\"]([^\'\\"]*)',
-          --       },
-          --     },
-          --     unpack(tailwind_defaults.settings.tailwindCSS),
-          --   },
-          -- },
-        },
-        ts_ls = {},
-        -- markdown_oxide = {
-        --   on_attach = function(client, bufnr)
-        --     if client.name == 'markdown_oxide' then
-        --       vim.api.nvim_create_user_command('Daily', function(args)
-        --         local input = args.args
-        --
-        --         vim.lsp.buf.execute_command { command = 'jump', arguments = { input } }
-        --       end, { desc = 'Open daily note', nargs = '*' })
-        --     end
-        --   end,
+        tailwindcss = {},
+        -- denols = {
+        --   root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
         -- },
+        ts_ls = {
+          -- root_dir = nvim_lsp.util.root_pattern 'package.json',
+          -- single_file_support = false,
+        },
         jdtls = {},
       }
 
@@ -801,7 +773,7 @@ require('lazy').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            nvim_lsp[server_name].setup(server)
           end,
         },
       }
@@ -816,6 +788,8 @@ require('lazy').setup({
             inlayHints = { enable = true },
           },
         },
+
+        nushell = {},
       }
       for srv_name, srv_conf in pairs(non_mason_servers) do
         require('lspconfig')[srv_name].setup(srv_conf)
