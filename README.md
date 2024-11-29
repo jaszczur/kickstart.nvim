@@ -1,3 +1,7 @@
+# WARNING
+Files moved to jaszczur/dotfiles repo and are now managed by Nix HomeManager.
+
+
 # kickstart.nvim
 
 ## Introduction

@@ -790,6 +790,8 @@ require('lazy').setup({
         },
 
         nushell = {},
+
+        nixd = {},
       }
       for srv_name, srv_conf in pairs(non_mason_servers) do
         require('lspconfig')[srv_name].setup(srv_conf)
@@ -835,6 +837,7 @@ require('lazy').setup({
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        nix = { 'alejandra' },
       },
     },
   },
